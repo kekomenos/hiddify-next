@@ -16,6 +16,8 @@ import 'package:hiddify/utils/utils.dart';
 import 'package:meta/meta.dart';
 
 abstract interface class ConnectionRepository {
+  SingboxConfigOption? get configOptionsSnapshot;
+
   TaskEither<ConnectionFailure, Unit> setup();
   Stream<ConnectionStatus> watchConnectionStatus();
   TaskEither<ConnectionFailure, Unit> connect(
@@ -38,7 +40,7 @@ class ConnectionRepositoryImpl
     required this.directories,
     required this.singbox,
     required this.platformSource,
-    required this.singBoxConfigOptionRepository,
+    required this.configOptionRepository,
     required this.profilePathResolver,
     required this.geoAssetPathResolver,
   });
@@ -46,9 +48,13 @@ class ConnectionRepositoryImpl
   final Directories directories;
   final SingboxService singbox;
   final ConnectionPlatformSource platformSource;
-  final SingBoxConfigOptionRepository singBoxConfigOptionRepository;
+  final ConfigOptionRepository configOptionRepository;
   final ProfilePathResolver profilePathResolver;
   final GeoAssetPathResolver geoAssetPathResolver;
+
+  SingboxConfigOption? _configOptionsSnapshot;
+  @override
+  SingboxConfigOption? get configOptionsSnapshot => _configOptionsSnapshot;
 
   bool _initialized = false;
 
@@ -83,7 +89,7 @@ class ConnectionRepositoryImpl
     return TaskEither<ConnectionFailure, SingboxConfigOption>.Do(
       ($) async {
         final options = await $(
-          singBoxConfigOptionRepository
+          configOptionRepository
               .getFullSingboxConfigOption()
               .mapLeft((l) => const InvalidConfigOption()),
         );
@@ -112,6 +118,7 @@ class ConnectionRepositoryImpl
   ) {
     return exceptionHandler(
       () {
+        _configOptionsSnapshot = options;
         return singbox
             .changeOptions(options)
             .mapLeft(InvalidConfigOption.new)

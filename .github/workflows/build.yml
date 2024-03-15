@@ -15,6 +15,7 @@ on:
 env:
   IS_GITHUB_ACTIONS: 1
   CHANNEL: "${{ inputs.channel }}"
+  FLUTTER_VERSION: '3.16.x'
   NDK_VERSION: r26b
   UPLOAD_ARTIFACT: "${{ inputs.upload-artifact }}"
   TAG_NAME: "${{ inputs.tag-name }}"
@@ -27,8 +28,24 @@ env:
   TARGET_NAME_dmg: "Hiddify-MacOS"
   TARGET_NAME_pkg: "Hiddify-MacOS-Installer"
   TARGET_NAME_ipa: "Hiddify-iOS"
+
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: 'stable'
+          cache: true
+      - name: Prepare
+        run: make linux-prepare
+      - name: Test
+        run: flutter test
+
   build:
+    needs: test
     permissions: write-all
     strategy:
       fail-fast: false
@@ -45,7 +62,7 @@ jobs:
           - platform: windows
             os: windows-2019
             aarch: amd64
-            targets: exe
+            targets: exe,msix
 
           - platform: linux
             os: ubuntu-22.04
@@ -64,7 +81,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.16.x'
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: 'stable'
           cache: true
       - name: Setup Java
@@ -93,7 +110,7 @@ jobs:
           tree
 
       - name: Setup Android Signing Properties
-        if: startsWith(matrix.platform,'android')
+        if: ${{ inputs.upload-artifact && startsWith(matrix.platform,'android') }}
         run: |
           echo "${{ secrets.ANDROID_SIGNING_KEY }}" | base64 --decode > android/key.jks
           echo "storeFile=$(pwd)/android/key.jks" > android/key.properties
@@ -101,8 +118,16 @@ jobs:
           echo "keyPassword=${{ secrets.ANDROID_SIGNING_KEY_PASSWORD }}" >> android/key.properties
           echo "keyAlias=${{ secrets.ANDROID_SIGNING_KEY_ALIAS }}" >> android/key.properties
 
+      - name: Setup Windows Signing Properties
+        if: ${{ inputs.upload-artifact && startsWith(matrix.platform,'windows') }}
+        run: |
+            $decodedText = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("${{ secrets.WINDOWS_SIGNING_KEY }}"))
+            Set-Content -Path "windows\sign.pfx" -Value $decodedText
+            (Get-Content "windows\packaging\msix\make_config.yaml") -replace '^certificate_password:.*$', 'certificate_password: ${{ secrets.WINDOWS_SIGNING_PASSWORD }}' | Set-Content "windows\packaging\msix\make_config.yaml"
+
+  
       - name: Setup Apple certificate and provisioning profile
-        if: startsWith(matrix.os,'macos')
+        if: ${{ inputs.upload-artifact && startsWith(matrix.os,'macos') }}
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.APPLE_BUILD_CERTIFICATE_BASE64 }}
           P12_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_P12_PASSWORD }}
@@ -156,7 +181,18 @@ jobs:
         run: |
           tree
           .\scripts\package_windows.ps1
-
+          
+      - name: Code Sign
+        if: ${{ inputs.upload-artifact && startsWith(matrix.platform,'windows') }}
+        uses: hiddify/signtool-code-sign-sha256@main
+        with:
+          certificate: '${{ secrets.WINDOWS_SIGNING_KEY }}'
+          cert-password: '${{ secrets.WINDOWS_SIGNING_PASSWORD }}'
+          folder: 'out'
+          timestamp-server: 'http://timestamp.digicert.com'
+          recursive: true
+          description: 'Hiddify'
+              
       - name: Copy to out Android APK
         if: matrix.platform == 'android-apk'
         run: |
@@ -207,8 +243,8 @@ jobs:
       - name: Clean up keychain and provisioning profile
         if: ${{ always() && startsWith(matrix.os,'macos')}}
         run: |
-          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
-          rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
+          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db ||echo ok
+          rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision ||echo ok
 
       - name: Upload Artifact
         if: env.UPLOAD_ARTIFACT == 'true'

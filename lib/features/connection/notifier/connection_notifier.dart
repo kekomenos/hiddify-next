@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:hiddify/core/haptic/haptic_service.dart';
 import 'package:hiddify/core/preferences/general_preferences.dart';
-import 'package:hiddify/core/preferences/service_preferences.dart';
 import 'package:hiddify/features/connection/data/connection_data_providers.dart';
 import 'package:hiddify/features/connection/data/connection_repository.dart';
 import 'package:hiddify/features/connection/model/connection_status.dart';
@@ -25,6 +24,17 @@ class ConnectionNotifier extends _$ConnectionNotifier with AppLogger {
       }).run();
     }
 
+    ref.listenSelf(
+      (previous, next) async {
+        if (previous == next) return;
+        if (previous case AsyncData(:final value) when !value.isConnected) {
+          if (next case AsyncData(value: final Connected _)) {
+            await ref.read(hapticServiceProvider.notifier).heavyImpact();
+          }
+        }
+      },
+    );
+
     ref.listen(
       activeProfileProvider.select((value) => value.asData?.value),
       (previous, next) async {
@@ -38,7 +48,7 @@ class ConnectionNotifier extends _$ConnectionNotifier with AppLogger {
     yield* _connectionRepo.watchConnectionStatus().doOnData((event) {
       if (event case Disconnected(connectionFailure: final _?)
           when PlatformUtils.isDesktop) {
-        ref.read(startedByUserProvider.notifier).update(false);
+        ref.read(Preferences.startedByUser.notifier).update(false);
       }
       loggy.info("connection status: ${event.format()}");
     });
@@ -62,11 +72,11 @@ class ConnectionNotifier extends _$ConnectionNotifier with AppLogger {
       switch (value) {
         case Disconnected():
           await haptic.lightImpact();
-          await ref.read(startedByUserProvider.notifier).update(true);
+          await ref.read(Preferences.startedByUser.notifier).update(true);
           await _connect();
         case Connected():
           await haptic.mediumImpact();
-          await ref.read(startedByUserProvider.notifier).update(false);
+          await ref.read(Preferences.startedByUser.notifier).update(false);
           await _disconnect();
         default:
           loggy.warning("switching status, debounce");
@@ -81,12 +91,12 @@ class ConnectionNotifier extends _$ConnectionNotifier with AppLogger {
         return _disconnect();
       }
       loggy.info("active profile changed, reconnecting");
-      await ref.read(startedByUserProvider.notifier).update(true);
+      await ref.read(Preferences.startedByUser.notifier).update(true);
       await _connectionRepo
           .reconnect(
         profile.id,
         profile.name,
-        ref.read(disableMemoryLimitProvider),
+        ref.read(Preferences.disableMemoryLimit),
       )
           .mapLeft((err) {
         loggy.warning("error reconnecting", err);
@@ -108,20 +118,24 @@ class ConnectionNotifier extends _$ConnectionNotifier with AppLogger {
 
   Future<void> _connect() async {
     final activeProfile = await ref.read(activeProfileProvider.future);
+    if (activeProfile == null) {
+      loggy.info("no active profile, not connecting");
+      return;
+    }
     await _connectionRepo
         .connect(
-      activeProfile!.id,
+      activeProfile.id,
       activeProfile.name,
-      ref.read(disableMemoryLimitProvider),
+      ref.read(Preferences.disableMemoryLimit),
     )
         .mapLeft((err) async {
       loggy.warning("error connecting", err);
-      loggy.warning(
-          err); //Go err is not normal object to see the go errors are string and need to be dumped
+      //Go err is not normal object to see the go errors are string and need to be dumped
+      loggy.warning(err);
       if (err.toString().contains("panic")) {
         await Sentry.captureException(Exception(err.toString()));
       }
-      await ref.read(startedByUserProvider.notifier).update(false);
+      await ref.read(Preferences.startedByUser.notifier).update(false);
       state = AsyncError(err, StackTrace.current);
     }).run();
   }

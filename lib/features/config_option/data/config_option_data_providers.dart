@@ -9,18 +9,9 @@ part 'config_option_data_providers.g.dart';
 ConfigOptionRepository configOptionRepository(
   ConfigOptionRepositoryRef ref,
 ) {
-  return ConfigOptionRepositoryImpl(
+  return ConfigOptionRepository(
     preferences: ref.watch(sharedPreferencesProvider).requireValue,
-  );
-}
-
-@Riverpod(keepAlive: true)
-SingBoxConfigOptionRepository singBoxConfigOptionRepository(
-  SingBoxConfigOptionRepositoryRef ref,
-) {
-  return SingBoxConfigOptionRepositoryImpl(
-    preferences: ref.watch(sharedPreferencesProvider).requireValue,
-    optionsRepository: ref.watch(configOptionRepositoryProvider),
+    getConfigOptions: () => ConfigOptions.singboxOptions(ref),
     geoAssetRepository: ref.watch(geoAssetRepositoryProvider).requireValue,
     geoAssetPathResolver: ref.watch(geoAssetPathResolverProvider),
   );

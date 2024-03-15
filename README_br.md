@@ -1,6 +1,8 @@
 <div dir="ltr">
+    
+[**![Lang_farsi](https://user-images.githubusercontent.com/125398461/234186932-52f1fa82-52c6-417f-8b37-08fe9250a55f.png) فارسی**](README_fa.md)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**Русский 🇷🇺**](README_ru.md)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**简体中文 🇨🇳**](README_cn.md)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**日本語 🇯🇵**](README_ja.md)
 
-[**![Lang_farsi](https://user-images.githubusercontent.com/125398461/234186932-52f1fa82-52c6-417f-8b37-08fe9250a55f.png) فارسی**](README_fa.md)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**Русский 🇷🇺**](README_ru.md)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**日本語 🇯🇵**](README_ja.md)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**Portugês-BR 🇧🇷**](README_br.md)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**English 🇺🇸**](README.md)
+
 </div>
 <br>
 
@@ -9,6 +11,10 @@
 
 <div align="center">
 
+<!--
+![Hiddify logo + text](https://github.com/hiddify/hiddify-next/assets/125398461/d821cfe0-b4c4-441f-be4e-eb9209f59542)
+    -->
+    
 [![GP-Intalls](https://img.shields.io/endpoint?color=green&logo=google-play&logoColor=green&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dapp.hiddify.com%26l%3DGoogle%2520Play%26m%3D%24shortinstalls&style=flat-square)](https://play.google.com/store/apps/details?id=app.hiddify.com) [![Downloads](https://img.shields.io/github/downloads/hiddify/hiddify-next/total?style=flat-square&logo=github)](https://github.com/hiddify/hiddify-next/releases/)[![Last Version](https://img.shields.io/github/release/hiddify/hiddify-next/all.svg?style=flat-square)](https://github.com/hiddify/hiddify-next/releases/)[![Last Release Date](https://img.shields.io/github/release-date/hiddify/hiddify-next.svg?style=flat-square)](https://github.com/hiddify/hiddify-next/releases/)[![commits](https://img.shields.io/github/commit-activity/m/hiddify/hiddify-next?style=flat-square)](https://github.com/hiddify/hiddify-next/)
 [![Youtube](https://img.shields.io/youtube/channel/views/UCxrmeMvVryNfB4XL35lXQNg?label=Youtube&style=flat-square&logo=youtube)](https://www.youtube.com/@hiddify)[![Telegram Channel](https://img.shields.io/endpoint?label=Channel&style=flat-square&url=https%3A%2F%2Ftg.sumanjay.workers.dev%2Fhiddify&color=blue)](https://telegram.dog/hiddify)[![Telegram Group](https://img.shields.io/endpoint?color=neon&label=Support%20Group&style=flat-square&url=https%3A%2F%2Ftg.sumanjay.workers.dev%2Fhiddify_board)](https://telegram.dog/hiddify_board/5)
 
@@ -16,50 +22,50 @@
 
 
 
+## O que é Hiddify-Next?
 
-## Hiddify-Next 是什么？
-
-<p dir="ltr" style="font-size: 16px">一款基于 <a href="https://github.com/SagerNet/sing-box">Sing-box</a> 通用代理工具的跨平台代理客户端。Hiddify 提供了较全面的代理功能，例如自动选择节点、TUN 模式、使用远程配置文件等。Hiddify 无广告，并且代码开源。它为大家自由访问互联网提供了一个支持多种协议的、安全且私密的工具。</p>
+<p dir="ltr" style="font-size: 16px">Um cliente de proxy multiplataforma baseado na ferramenta de proxy universal <a href="https://github.com/SagerNet/sing-box">Sing-box</a>. O Hiddify oferece uma ampla gama de recursos, como seleção automática de nós, modo TUN, perfis remotos, etc. O Hiddify é livre de anúncios e de código aberto. Com suporte para uma ampla variedade de protocolos, ele oferece uma maneira segura e privada de acessar a internet gratuitamente.</p>
 
 <div align=center>
 <img width=90% alt="English Demo" src="https://github.com/hiddify/hiddify-next/assets/125398461/ffe5346d-3404-470f-b5e0-4364e23743d2">
+
 </div>
 
+## 🚀 Principais recursos
 
-## 🚀 主要特性
+✈️ Multiplataforma: Android, iOS, Windows, macOS e Linux
 
-✈️ 多平台客户端：Android、iOS、Windows、macOS 和 Linux
+⭐ Interface intuitiva e acessível
 
-⭐ 简单易用的用户界面
+🔍 Seleção de nós baseada em atraso
 
-🔍 基于延迟自动选择节点
+🟡 Amplas opções de protocolos:
+Vless, Vmess, Reality, TUIC, Hysteria, SSH, etc.
 
-🟡 全面的协议支持：**Vless、Vmess、Reality、TUIC、Hysteria、SSH**
+🟡 Links de assinatura e formatos de configuração: Sing-box, V2ray, Clash, Clash meta
 
-🟡 多种订阅链接和配置文件格式支持： **Sing-box、V2ray、Clash、Clash meta**
+🔄 Atualização automática de assinatura
 
-🔄 支持自动更新订阅
+🔎 Exibição de informações do perfil, incluindo dias restantes e uso de tráfego
 
-🔎 可显示包含了剩余天数和流量使用情况的配置文件信息
+🛡 Código aberto, seguro e impulsionado pela comunidade
 
-🛡 开源、安全且由社区驱动
+🌙 Modos escuro e claro
 
-🌙 深色和浅色模式
+⚙ Compatível com todos os painéis de gerenciamento de proxy
 
-⚙ 兼容所有的代理管理面板
+⭐ Configuração adequada para Irã, China, Rússia e outros países
 
-⭐ 适用于伊朗、中国、俄罗斯或其他国家的配置
+📱 Disponível no [Google Play](https://play.google.com/store/apps/details?id=app.hiddify.com)
 
-📱 可在 [Google Play](https://play.google.com/store/apps/details?id=app.hiddify.com) 上获取
-
-## 🔗 下载
+## 🔗 Download
 
 <div align=left>
 <table>
     <thead align=left>
         <tr>
-            <th>操作系统</th>
-            <th>下载链接</th>
+            <th>Sistema Operacional</th>
+            <th>Download</th>
         </tr>
     </thead>
     <tbody align=left>
@@ -90,56 +96,56 @@
 </table>
 
 
+</div>
+
+## ⚙️ Instalação e tutoriais
+
+**Encontre informações de tutoriais em nossa página wiki clicando na imagem abaixo.**
+
+<div align="center">
+
+[![Tutorials on Wiki](https://github.com/hiddify/hiddify-next/assets/125398461/95bb5cf8-c143-4934-87d6-b9d4c31e035e)](https://github.com/hiddify/hiddify-next/wiki)
+
 
 </div>
 
-## ⚙️ 安装和教程
-**请单击下面的图片，在我们的维基页面上找到相关信息。**
+## 🌎 Tradução
 
-<div align=center>
-    
-[![Wiki上的所有教程](https://github.com/hiddify/hiddify-next/assets/125398461/95bb5cf8-c143-4934-87d6-b9d4c31e035e)](https://github.com/hiddify/hiddify-next/wiki)
-
-</div>
- 
-
-## 🌎 翻译
 <div align=center>
     
 [![inlang status badge](https://inlang.com/badge?url=github.com/hiddify/hiddify-next)](https://inlang.com/editor/github.com/hiddify/hiddify-next?ref=badge)
-
 </div>
 
-您可以通过手动编辑位于 `/assets/translations` 中的 JSON 文件，或使用 [Inlang 在线编辑器](https://inlang.com/editor/github.com/hiddify/hiddify-next)来改进现有语言或添加新语言。
+Melhore os idiomas existentes ou adicione novos editando manualmente os arquivos JSON localizados em `/assets/translations` ou usando o [editor online Inlang](https://inlang.com/editor/github.com/hiddify/hiddify-next).
 
-## ✏️ 致谢
-我们谨向以下项目的贡献者表示诚挚的谢意，这些项目打下的坚实基础和开发的创新功能，显着增强了本项目的功能，为本项目的开发带来了成功。
+## ✏️ Agradecimentos
+
+Gostaríamos de expressar nossa sincera gratidão aos contribuidores dos seguintes projetos, cuja base sólida e recursos inovadores têm melhorado significativamente o sucesso e a funcionalidade deste projeto.
+
 - [Sing-box](https://github.com/SagerNet/sing-box)
 - [Sing-box for Android](https://github.com/SagerNet/sing-box-for-android)
 - [Sing-box for Apple](https://github.com/SagerNet/sing-box-for-apple)
 - [Clash](https://github.com/Dreamacro/clash)
 - [Clash Meta](https://github.com/MetaCubeX/Clash.Meta)
 - [FClash](https://github.com/Fclash/Fclash)
-- [字体 Vazirmatn Font by Saber Rastikerdar](https://github.com/rastikerdar/vazirmatn)
-- [其他](./pubspec.yaml)
+- [Vazirmatn Font by Saber Rastikerdar](https://github.com/rastikerdar/vazirmatn)
+- [Others](./pubspec.yaml)
 
+## 🎯 Doação e Suporte
 
-
-## 🎯 捐赠和支持
-
-支持我们的最简单方法是单击此页面顶部的Star (⭐) 。
+A maneira mais fácil de nos apoiar é clicar na estrela (⭐) no topo desta página.
 
 <div align=center>
-
+    
 <img alt="Star History Chart" width=50% src="https://api.star-history.com/svg?repos=Hiddify/hiddify-next&type=Date)](https://star-history.com/#Hiddify/hiddify-next&Date" />
 
 </div>
 
-我们的服务也需要经济支持。我们所有的活动都是志愿性质的，经济支持将被用于项目的发展。您可以在 [这里](https://github.com/hiddify/hiddify-server/wiki/support) 查看我们的支持地址。
+Também precisamos de apoio financeiro para nossos serviços. Todas as nossas atividades são realizadas voluntariamente e o apoio financeiro será utilizado no desenvolvimento do projeto. Você pode ver nossos links de suporte [aqui](https://github.com/hiddify/hiddify-server/wiki/support).
 
-## 👩‍🏫 合作及联系信息
+## 👩‍🏫 Colaboração e Informações de Contato
 
-Hiddify 是一个由社区驱动的项目。如果您有兴趣为本项目做出贡献，请阅读 [贡献指南](./CONTRIBUTING.md)。我们将非常感谢您，如果您能够在以下领域提供任何帮助：Flutter、Go、iOS 开发 (Swift)、Android 开发 (Kotlin)。
+Hiddify é um projeto impulsionado pela comunidade. Se você estiver interessado em contribuir, por favor, leia as [diretrizes de contribuição](./CONTRIBUTING.md). Agradeceríamos especialmente qualquer ajuda que pudermos obter nessas áreas: **Flutter, Go, desenvolvimento iOS (Swift), desenvolvimento Android (Kotlin).**
 
 <div align=center>
 
@@ -154,16 +160,14 @@ Hiddify 是一个由社区驱动的项目。如果您有兴趣为本项目做出
 </div>
 
 <p align=center>
-我们非常感谢所有参与此项目的朋友，包括下面列出的这些朋友，以及许许多多没有在 Github 社区的朋友。这对我们来说意义重大。♥
+Agradecemos a todas as pessoas que estão participando deste projeto. Algumas pessoas aqui e muitas outras fora do Github. Isso significa muito para nós. ♥
  </p>
-
-
+ 
 <p align=center> 
 <a href="https://github.com/hiddify/hiddify-next/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=hiddify/hiddify-next" />
 </a>
 </p>
 <p align=center>
- 使用 <a rel="" target="_blank" href="https://contrib.rocks">Contrib.Rocks</a> 制作
+ Feito com <a rel="" target="_blank" href="https://contrib.rocks">Contrib.Rocks</a> 
 </p>
-

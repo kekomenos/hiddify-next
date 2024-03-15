@@ -124,7 +124,7 @@ android-aab-release:
 	ls -R build/app/outputs
 
 windows-release:
-	flutter_distributor package --flutter-build-args=verbose --platform windows --targets exe $(DISTRIBUTOR_ARGS)
+	flutter_distributor package --flutter-build-args=verbose --platform windows --targets exe,msix $(DISTRIBUTOR_ARGS)
 
 linux-release: 
 	flutter_distributor package --platform linux --targets deb,rpm,appimage $(DISTRIBUTOR_ARGS)
@@ -146,6 +146,8 @@ windows-libs:
 	$(MKDIR) $(DESKTOP_OUT) || echo Folder already exists. Skipping...
 	curl -L $(CORE_URL)/$(CORE_NAME)-windows-amd64.tar.gz | tar xz -C $(DESKTOP_OUT)$(SEP)
 	ls $(DESKTOP_OUT) || dir $(DESKTOP_OUT)$(SEP)
+	#$(RM) $(DESKTOP_OUT)$(SEP)HiddifyService.exe 
+	#temporary disable windows service
 
 linux-libs:
 	mkdir -p $(DESKTOP_OUT)
@@ -205,9 +207,10 @@ release: # Create a new tag for release.
 	BUILD_NUMBER=$$(( $${VERSION_ARRAY[0]} * 10000 + $${VERSION_ARRAY[1]} * 100 + $${VERSION_ARRAY[2]} )) && \
 	echo "version: $${VERSION_STR}+$${BUILD_NUMBER}" && \
 	sed -i "s/^version: .*/version: $${VERSION_STR}\+$${BUILD_NUMBER}/g" pubspec.yaml && \
+	sed -i "s/^msix_version: .*/msix_version: $${VERSION_ARRAY[0]}.$${VERSION_ARRAY[1]}.$${VERSION_ARRAY[2]}.0/g" windows/packaging/msix/make_config.yaml && \
 	sed -i "s/CURRENT_PROJECT_VERSION = $${cbuild_number}/CURRENT_PROJECT_VERSION = $${BUILD_NUMBER}/g" ios/Runner.xcodeproj/project.pbxproj && \
 	sed -i "s/MARKETING_VERSION = $${cstr_version}/MARKETING_VERSION = $${VERSION_STR}/g" ios/Runner.xcodeproj/project.pbxproj && \
-	git add ios/Runner.xcodeproj/project.pbxproj pubspec.yaml&& \
+	git add ios/Runner.xcodeproj/project.pbxproj pubspec.yaml windows/packaging/msix/make_config.yaml && \
 	git commit -m "release: version $${TAG}" && \
 	echo "creating git tag : v$${TAG}" && \
 	git push && \

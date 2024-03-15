@@ -17,7 +17,8 @@
         "decline": "Decline",
         "unknown": "Unknown",
         "hidden": "Hidden",
-        "timeout": "timeout"
+        "timeout": "timeout",
+        "clipboardExportSuccessMsg": "Added to Clipboard"
     },
     "intro": {
         "termsAndPolicyCaution(rich)": "by continuing you agree with ${tap(@:about.termsAndConditions)}",
@@ -56,7 +57,11 @@
             "remainingDuration": "${duration} Days Remaining",
             "remainingTrafficSemanticLabel": "${consumed} of ${total} traffic consumed.",
             "expired": "Expired",
-            "noTraffic": "Out of Quota"
+            "noTraffic": "Out of Quota",
+            "upload": "Upload",
+            "download": "Download",
+            "total": "Total Traffic",
+            "expireDate": "Expire Date"
         },
         "sortBy": {
             "lastUpdate": "Recently updated",
@@ -162,6 +167,10 @@
         "requiresRestartMsg": "For this to take effect restart the app",
         "experimental": "Experimental",
         "experimentalMsg": "Features with Experimental flag are still in development and might cause issues.",
+        "exportOptions": "Export Options to Clipboard",
+        "exportAllOptions": "Export Options to Clipboard (debug)",
+        "importOptions": "Import Options from Clipboard",
+        "importOptionsMsg": "This will rewrite all config options with provided values. Are you sure?",
         "general": {
             "sectionTitle": "General",
             "locale": "Language",
@@ -216,6 +225,8 @@
         },
         "config": {
             "resetBtn": "Reset options",
+            "reconnectMsg": "Reconnect for changes to take effect",
+            "reconnectBtn": "Reconnect",
             "serviceMode": "Service Mode",
             "serviceModes": {
                 "proxy": "Proxy Service Only",
@@ -237,6 +248,9 @@
                 "title": "Cloudflare WARP Consent",
                 "description(rich)": "Cloudflare WARP is a free WireGuard VPN provider. By enabling this option you are agreeing to the Cloudflare WARP's ${tos(Terms of Service)} and ${privacy(Privacy Policy)}."
             },
+            "generateWarpConfig": "Generate WARP config",
+            "missingWarpConfig": "Missing WARP config",
+            "warpConfigGenerated": "WARP config generated",
             "pageTitle": "Config Options",
             "logLevel": "Log Level",
             "resolveDestination": "Resolve Destination",
@@ -284,7 +298,8 @@
             "warpLicenseKey": "License Key",
             "warpCleanIp": "Clean IP",
             "warpPort": "Port",
-            "warpNoise": "Noise"
+            "warpNoise": "Noise Count",
+            "warpNoiseDelay": "Noise Delay"
         },
         "geoAssets": {
             "pageTitle": "Routing Assets",
